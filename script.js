@@ -17,15 +17,24 @@ class User {
         this.score++;
         console.log(this.email, 'updated score to', this.score);
         return this; //return this to allow method chaining
+    } 
+}
+
+class Admin extends User {
+    deleteUser(user){
+        users = users.filter(u =>{
+            return u.email!== user.email;
+        });
     }
 }
 
 var userOne = new User('kaddy@gmail.com','Kaddy');
 var userTwo = new User('diyan@gmail.com','Diyan');
+var admin = new Admin('admin@gmail.com', 'admin');
 
 
-//userOne.login().logout(); //Error because return this is required then we can use method Chaining
-//userOne.logout();
-//userTwo.logout();
-// This is call method chaining
-userOne.login().updateScore().updateScore().logout();
+var users = [userOne, userTwo, admin];
+
+admin.deleteUser(userTwo);
+console.log(users);
+//userOne.deleteUser(); //Error only admin have right to delete user
